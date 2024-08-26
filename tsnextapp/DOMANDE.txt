@@ -1,0 +1,77 @@
+### Esercizio 1: Domande e Risposte
+
+1. Quali sono le principali componenti del mini-compilatore che riesci a individuare nel codice? Elencale brevemente.
+
+Il codice è suddiviso in tre funzioni principali.
+Ognuna delle quali e' responsabile dell'esecuzione di operazioni mirate e specifiche. 
+
+la funzione tokenizer() suddivide il codice in unità più piccole chiamate "token".
+il token viene inizializzato come un array vuoto, poi noi piano piano ci pushamo dentro quello che ci serve.
+la funzione parser() trasforma i token generati e li organizza dentro un oggettone (AST).
+la funzione traverser() manipola l'oggettone AST per fare ulteriori operazioni. Cosa dipende da noi ahahahah
+
+2. Cos'è e cosa fa la funzione tokenizer()? Spiegalo con parole tue.
+
+La funzione tokenizer() prende il codice (per un compilatore e' il codice stesso, per un contacaratteri potrebbe essere l'input utente) 
+e lo suddivide in tanti array, i cosidetti "token".
+I token quindi suddividono il codice nelle loro parti piu' piccole, indivisibili (come numeri, stringhe, parentesi, ecc.).
+a seconda del tipo di carattere che incontra, la funzione genera un token specifico.
+
+Se trova spazi vuoti viengono ignorati.
+Se trova una parentesi aperta o chiusa, crea un token di tipo paren.
+il token era inizializzato come array vuoto, ora ci pusho un oggetto, con chiave type:"paren" , e chiave value:"carattere parentesi".
+stessa cosa con i numeri.
+Se trova caratteri numerici crea un token di tipo number. quindi un oggetto con chiave type:"number" e value:"il carattere numeri trovato".
+Se trova caratteri delimitati da virgolette,(stringhe) , raccoglie interamente la "stringa" e la salvata in un token di tipo string.
+quindi sara' un oggetto con chiave type:"string" e value:"l'intera stringa"
+Se trova caratteri diversi da stringhe li salva in un token di tipo name.
+i caratteri che non sono stringhe sono indicatori, nomi di variabili...ecc ecc
+Se trova caratteri non riconosciuti genera un'eccezione.
+quindi alla fine del ciclo while bene o male potremmo trovarci davanti ad un risultato di questo tipo:
+
+tokens=[
+
+    {type:"string", value:"stringa"},
+    {type:"number",value:"1"},
+    {type:"paren",value:"("},
+    {type:"name",value:"n"}
+    ...
+    ] 
+    
+e cosi via,
+con ogni lettera, ogni parentesi, ogni carattere trovato. 
+
+3. Perché è fondamentale avere un parser in un compilatore? Quale ruolo svolge?
+
+Il parser è essenziale perché prende i token generati dal tokenizer e li organizza in una struttura piu' facile da manipolare. L'AST.
+
+la funzione parser() usa una variabile current per tracciare la posizione nell'array di tokens e analizza i token ,
+controllando il "type" del token. in base al "type" li raggruppa in ulteriori oggetti. 
+se i token sono di tipo "number" , ritorna un oggetto con chiavi: type:"NumerLiteral" e value:"il valore della chiave value del token (token.value).
+cosi anche per i token di tipo "stringa", ma il type sara' "StringLiteral",
+se sono token di tipo "paren" , ritornera' un oggetto con type:"CallExpression".
+
+Il risultato finale è un oggetto (AST) avente una struttura gerarchica che riflette l'intera grammatica del codice.
+il risultato e' un oggetto, con chiavi: type:"programm" e un body (array), pieno di oggetti.
+e' un ottima organizazzione devo dire ahha
+
+4. Se dovessi creare un conta caratteri in JavaScript, quali parti di questo compilatore ti sarebbero utili?
+
+Per sviluppare un conta caratteri, a naso direi che basta la prima funzione.
+Grazie alla variabile "current" , terrei traccia del numero di caratteri "digitati".
+Certo, potrei con deli condizionali, scegliere di tenere traccia di tutti i tipi di caratteri, anche degli spazi vuoti.
+Quindi si, basterebbe la funzione tokenizer() ma rivista leggermente. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
