@@ -44,5 +44,9 @@ console.log("Parents Count:", result.parenCount);
 console.log("------------------------------");
 console.log(
   "Total Characters:",
-  result.charCount + result.numCount + result.specialCount + result.emptySpace
+  result.charCount +
+    result.numCount +
+    result.specialCount +
+    result.emptySpace +
+    result.parenCount
 );
