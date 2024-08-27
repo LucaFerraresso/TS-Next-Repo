@@ -1,8 +1,9 @@
 const countCharacters = (input) => {
-  let charCount = 0;
   let numCount = 0;
-  let specialCount = 0;
+  let charCount = 0;
+  let parenCount = 0;
   let emptySpace = 0;
+  let specialCount = 0;
 
   for (let i = 0; i < input.length; i++) {
     let char = input[i];
@@ -11,12 +12,27 @@ const countCharacters = (input) => {
       numCount++;
     } else if (/[a-zA-Z]/.test(char)) {
       charCount++;
-    } else if (char !== " ") {
-      specialCount++;
+    } else if (
+      char === "(" ||
+      char === ")" ||
+      char === "[" ||
+      char === "]" ||
+      char === "{" ||
+      char === "}"
+    ) {
+      parenCount++;
     } else if (char === " ") {
       emptySpace++;
+    } else {
+      specialCount++;
     }
   }
+
+  console.log("Numeri:", numCount);
+  console.log("Lettere:", charCount);
+  console.log("Parentesi:", parenCount);
+  console.log("Spazi vuoti:", emptySpace);
+  console.log("Caratteri speciali:", specialCount);
 
   return { charCount, numCount, specialCount, emptySpace };
 };

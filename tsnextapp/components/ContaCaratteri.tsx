@@ -6,13 +6,15 @@ const ContaCaratteri = () => {
   const [numCount, setNumCount] = useState(0);
   const [specialCount, setSpecialCount] = useState(0);
   const [emptySpace, setEmptySpace] = useState(0);
+  const [parenCount, setParentCount] = useState(0);
   const [text, setText] = useState("");
 
-  const countCharacters = (input) => {
+  const countCharacters = (input: string) => {
     let charCount = 0;
     let numCount = 0;
     let specialCount = 0;
     let emptySpace = 0;
+    let parenCount = 0;
 
     for (let i = 0; i < input.length; i++) {
       let char = input[i];
@@ -21,10 +23,19 @@ const ContaCaratteri = () => {
         numCount++;
       } else if (/[a-zA-Z]/.test(char)) {
         charCount++;
-      } else if (char !== " ") {
-        specialCount++;
+      } else if (
+        char === "(" ||
+        char === ")" ||
+        char === "[" ||
+        char === "]" ||
+        char === "{" ||
+        char === "}"
+      ) {
+        parenCount++;
       } else if (char === " ") {
         emptySpace++;
+      } else {
+        specialCount++;
       }
     }
 
@@ -32,6 +43,7 @@ const ContaCaratteri = () => {
     setNumCount(numCount);
     setSpecialCount(specialCount);
     setEmptySpace(emptySpace);
+    setParentCount(parenCount);
   };
 
   const handleButtonClick = () => {
@@ -72,6 +84,9 @@ const ContaCaratteri = () => {
         </p>
         <p className="text font-bold text-orange-800">
           Spazi vuoti: <span className="font-bold">{emptySpace}</span>
+        </p>
+        <p className="text font-bold text-black">
+          Parentesi: <span className="font-bold">{parenCount}</span>
         </p>
       </div>
     </div>
