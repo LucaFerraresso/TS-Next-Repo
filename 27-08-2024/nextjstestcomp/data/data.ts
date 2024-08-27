@@ -53,7 +53,7 @@ export const Items: Item[] = [
       email: "XXXXXXXXXXXXXXX",
     },
     languages: {
-      languages: ["html", "css", "js", "ts"],
+      languages: ["xhtml", "scss", "js", "ts"],
     },
   },
   {
@@ -69,7 +69,7 @@ export const Items: Item[] = [
       email: "XXXXXXXXXXXXXXX",
     },
     languages: {
-      languages: ["html", "css", "js", "ts"],
+      languages: ["mySql", "php", "ruby", "Java"],
     },
   },
 ];
