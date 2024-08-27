@@ -68,11 +68,6 @@ const Card: React.FC<CardProps> = ({ items }) => {
                   <li>Date of Birth: {item.personalinfo?.dataNascita}</li>
                 </ul>
               </div>
-              <div className="relative mt-8">
-                <h4 className="text-md font-semibold text-gray-900">
-                  Contact Info:
-                </h4>
-              </div>
               <div className="relative mt-8 flex items-center gap-x-4">
                 <div className="text-sm leading-6 space-y-2">
                   <p className="font-semibold text-gray-900 hover:text-indigo-500 transition-colors duration-200 ease-in-out flex items-center">
