@@ -28,13 +28,7 @@ const countCharacters = (input) => {
     }
   }
 
-  console.log("Numeri:", numCount);
-  console.log("Lettere:", charCount);
-  console.log("Parentesi:", parenCount);
-  console.log("Spazi vuoti:", emptySpace);
-  console.log("Caratteri speciali:", specialCount);
-
-  return { charCount, numCount, specialCount, emptySpace };
+  return { charCount, numCount, specialCount, emptySpace, parenCount };
 };
 
 // Ottieni l'input dell'utente dalla console
@@ -46,3 +40,9 @@ console.log("Character Count:", result.charCount);
 console.log("Number Count:", result.numCount);
 console.log("Special Character Count:", result.specialCount);
 console.log("Empty Space Count:", result.emptySpace);
+console.log("Parents Count:", result.parenCount);
+console.log("------------------------------");
+console.log(
+  "Total Characters:",
+  result.charCount + result.numCount + result.specialCount + result.emptySpace
+);
