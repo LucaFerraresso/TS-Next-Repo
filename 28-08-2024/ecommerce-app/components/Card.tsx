@@ -9,7 +9,7 @@ interface CardProps {
   onDelete?: () => void;
 }
 
-export default function Card({ item, onEdit, onDelete }: CardProps) {
+const Card = ({ item, onEdit, onDelete }: CardProps) => {
   return (
     <div className="w-[300px] border border-gray-300 rounded-lg shadow-md p-6 flex flex-col items-center bg-white hover:bg-gray-50 hover:shadow-lg transition-shadow duration-300 ease-in-out">
       <h2 className="text-xl font-bold text-blue-600 mb-2">
@@ -38,4 +38,5 @@ export default function Card({ item, onEdit, onDelete }: CardProps) {
       </div>
     </div>
   );
-}
+};
+export default Card;
