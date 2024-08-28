@@ -41,23 +41,20 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">
             Lista di Prodotti
           </h1>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-6">
             {isPending ? (
               <p className="text-center text-gray-500">
                 Caricamento in corso...
               </p>
             ) : items.length > 0 ? (
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {items.map((item) => (
-                  <li key={item.name}>
-                    <Card
-                      item={item}
-                      onEdit={() => console.log(`editing id `)}
-                      onDelete={() => console.log(`deleting...`)}
-                    />
-                  </li>
-                ))}
-              </ul>
+              items.map((item) => (
+                <Card
+                  key={item._id}
+                  item={item}
+                  onDelete={() => console.log("deleting...")}
+                  onEdit={() => console.log("editing...")}
+                />
+              ))
             ) : (
               <p className="text-center text-gray-500">
                 Nessun prodotto trovato
