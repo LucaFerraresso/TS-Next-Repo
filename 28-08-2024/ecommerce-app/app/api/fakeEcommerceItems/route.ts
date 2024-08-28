@@ -9,6 +9,7 @@ export async function GET() {
     const products = await Product.find({});
     return NextResponse.json(products);
   } catch (error) {
+    console.error("Errore nel recupero dei prodotti", error);
     return NextResponse.json(
       { error: "Errore nel recupero dei prodotti" },
       { status: 500 }
@@ -25,6 +26,7 @@ export async function POST(req: Request) {
     await newProduct.save();
     return NextResponse.json(newProduct, { status: 201 });
   } catch (error) {
+    console.error("Errore durante la creazione del prodotto", error);
     return NextResponse.json(
       { error: "Errore durante la creazione del prodotto" },
       { status: 500 }

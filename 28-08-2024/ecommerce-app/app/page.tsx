@@ -5,8 +5,10 @@ import Footer from "@/components/Footer";
 import Card from "@/components/Card";
 
 interface Item {
+  _id: string;
   name: string;
   price: string;
+  description: string;
 }
 
 export default function Home() {
@@ -20,6 +22,7 @@ export default function Home() {
         throw new Error("Errore nel recupero dei dati");
       }
       const data: Item[] = await response.json();
+      console.log("data:", data);
       setItems(data);
     } catch (error) {
       console.error("Errore durante il fetch:", error);
@@ -27,29 +30,38 @@ export default function Home() {
   }
 
   useEffect(() => {
-    startTransition(async () => {
-      await fetchItems();
-    });
+    startTransition(fetchItems);
   }, []);
 
   return (
-    <div>
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
       <Navbar />
-      <main className="flex min-h-screen flex-col  ">
-        <div className="border border-black p-6 ">
-          <h1>Lista di Prodotti</h1>
-          <div className="flex flex-row p-6 gap-6 border border-black rounded-lg">
-            {isPending ? <p>Caricamento in corso...</p> : null}
-            {items.length > 0 ? (
-              <ul>
-                {items.map((item, index) => (
-                  <li key={index}>
-                    <Card name={item.name} price={item.price} />
+      <main className="flex flex-col items-center justify-center p-6">
+        <div className="bg-white shadow-lg p-8 rounded-lg w-full max-w-3xl">
+          <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">
+            Lista di Prodotti
+          </h1>
+          <div className="flex flex-col gap-6">
+            {isPending ? (
+              <p className="text-center text-gray-500">
+                Caricamento in corso...
+              </p>
+            ) : items.length > 0 ? (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {items.map((item) => (
+                  <li key={item.name}>
+                    <Card
+                      item={item}
+                      onEdit={() => console.log(`editing id `)}
+                      onDelete={() => console.log(`deleting...`)}
+                    />
                   </li>
                 ))}
               </ul>
             ) : (
-              <p>Nessun prodotto trovato</p>
+              <p className="text-center text-gray-500">
+                Nessun prodotto trovato
+              </p>
             )}
           </div>
         </div>
