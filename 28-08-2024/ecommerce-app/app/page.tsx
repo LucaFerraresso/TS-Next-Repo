@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Card from "@/components/Card";
 
 interface Item {
@@ -22,7 +20,6 @@ export default function Home() {
         throw new Error("Errore nel recupero dei dati");
       }
       const data: Item[] = await response.json();
-      console.log("data:", data);
       setItems(data);
     } catch (error) {
       console.error("Errore durante il fetch:", error);
@@ -46,14 +43,7 @@ export default function Home() {
                 Caricamento in corso...
               </p>
             ) : items.length > 0 ? (
-              items.map((item) => (
-                <Card
-                  key={item._id}
-                  item={item}
-                  onDelete={() => console.log("deleting...")}
-                  onEdit={() => console.log("editing...")}
-                />
-              ))
+              items.map((item) => <Card key={item._id} item={item} />)
             ) : (
               <p className="text-center text-gray-500">
                 Nessun prodotto trovato
