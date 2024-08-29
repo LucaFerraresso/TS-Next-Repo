@@ -35,7 +35,6 @@ export default function Home() {
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
-      <Navbar />
       <main className="flex flex-col items-center justify-center p-6">
         <div className="bg-white shadow-lg p-8 rounded-lg w-full max-w-3xl">
           <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">
@@ -63,7 +62,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
