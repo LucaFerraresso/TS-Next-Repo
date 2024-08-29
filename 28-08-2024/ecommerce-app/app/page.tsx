@@ -10,6 +10,7 @@ export interface Item {
   price: string;
   description: string;
   category: string;
+  images: string;
 }
 
 export default function Home() {

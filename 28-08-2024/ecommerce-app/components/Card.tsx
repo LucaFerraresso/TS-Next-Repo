@@ -10,6 +10,7 @@ interface CardProps {
     price: string;
     description: string;
     category: string;
+    images: string;
   };
   showDetailsLink?: boolean;
 }
@@ -34,6 +35,11 @@ const Card = ({ item, showDetailsLink = true }: CardProps) => {
       <h2 className="text-2xl font-bold text-gray-700 mb-2">
         Name:{item.name}
       </h2>
+      <img
+        src={item.images}
+        alt={item.name}
+        className="w-full h-48 object-cover mb-4"
+      />
       <p className="text-xl text-gray-600 mb-4">Price: {item.price} €</p>
       <p className="text-gray-600 mb-6 text-center">
         Description:{item.description}

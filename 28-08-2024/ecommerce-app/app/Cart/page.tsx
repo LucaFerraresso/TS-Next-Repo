@@ -53,6 +53,10 @@ const Cart = () => {
                   className="flex justify-between items-center p-6 bg-white shadow-xl rounded-lg transform transition-transform hover:scale-105"
                 >
                   <div className="flex-1">
+                    <img
+                      src={item.images}
+                      className="w-32 h-32 object-cover rounded-lg mr-4"
+                    />
                     <h2 className="text-xl font-bold text-gray-700">
                       {item.name} - {item.price}€
                     </h2>

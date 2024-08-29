@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Item } from "@/app/page";
 import Link from "next/link";
+import "@/public/images/tv.jpg";
 
 interface ProductProps {
   params: { id: string };
@@ -49,6 +50,7 @@ const ProductPage = ({ params }: ProductProps) => {
         <h1 className="text-4xl font-extrabold mb-4 text-center text-blue-600">
           {item.name}
         </h1>
+        <img src={item.images} alt={item.name} className="mb-4 mx-auto" />
         <p className="text-2xl text-gray-800 mb-4">
           Prezzo: <span className="font-bold">{item.price} €</span>
         </p>
