@@ -8,37 +8,22 @@ if (!MONGODB_URI) {
   );
 }
 
-interface MongooseCache {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-}
-
-declare global {
-  var mongoose: MongooseCache;
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+let cachedConnection: typeof mongoose | null = null;
 
 async function connectMongo() {
-  if (cached.conn) {
-    return cached.conn;
+  if (cachedConnection) {
+    return cachedConnection;
   }
 
-  if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(MONGODB_URI, {
-        bufferCommands: false,
-      })
-      .then((mongoose) => {
-        return mongoose;
-      });
+  try {
+    cachedConnection = await mongoose.connect(MONGODB_URI, {
+      bufferCommands: false,
+    });
+    return cachedConnection;
+  } catch (error) {
+    console.log("Error connecting to MongoDB: ", error);
+    throw error;
   }
-  cached.conn = await cached.promise;
-  return cached.conn;
 }
 
 export default connectMongo;
