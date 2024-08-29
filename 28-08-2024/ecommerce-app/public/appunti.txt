@@ -1,0 +1,1 @@
+//add cart page + add "addcart" button, add "productpage" + add animation + add skeletons

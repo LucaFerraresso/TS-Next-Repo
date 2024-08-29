@@ -5,6 +5,7 @@ interface IProduct extends Document {
   name: string;
   price: string;
   description: string;
+  category: string;
 }
 
 const ProductSchema: Schema = new Schema({
@@ -12,6 +13,7 @@ const ProductSchema: Schema = new Schema({
   name: { type: String, required: true },
   price: { type: String, required: true },
   description: { type: String, required: true },
+  category: { type: String, required: true },
 });
 
 const Product = models.Product || model<IProduct>("Product", ProductSchema);

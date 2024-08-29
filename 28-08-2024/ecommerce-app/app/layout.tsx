@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 import "./globals.css";
+import { CartProvider } from "@/Context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,13 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
+      <CartProvider>
+        <body>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </CartProvider>
     </html>
   );
 };
