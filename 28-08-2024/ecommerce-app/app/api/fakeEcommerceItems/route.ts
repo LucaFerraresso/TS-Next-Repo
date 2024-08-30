@@ -7,6 +7,7 @@ export async function GET() {
 
   try {
     const products = await Product.find({});
+
     return NextResponse.json(products);
   } catch (error) {
     console.error("Errore nel recupero dei prodotti", error);

@@ -12,6 +12,16 @@ export interface Item {
   category: string;
   images: string;
 }
+export interface ItemCart {
+  _id: string;
+  name: string;
+  price: string;
+  images: string;
+  description: string;
+  category: string;
+  quantity: number;
+  creationDate: string;
+}
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);

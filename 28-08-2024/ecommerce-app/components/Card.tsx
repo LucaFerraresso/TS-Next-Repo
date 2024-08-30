@@ -21,7 +21,7 @@ const Card = ({ item, showDetailsLink = true }: CardProps) => {
 
   const handleAddToCart = () => {
     setIsClicked(true);
-    addItemToCart(item);
+    addItemToCart(item); // Aggiunge il prodotto al carrello tramite API
     setTimeout(() => setIsClicked(false), 300); // Resetta l'animazione dopo 300ms
   };
 

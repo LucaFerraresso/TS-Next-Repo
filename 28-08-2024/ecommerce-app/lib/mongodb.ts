@@ -1,3 +1,4 @@
+//connect to mongo
 import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
@@ -27,3 +28,16 @@ async function connectMongo() {
 }
 
 export default connectMongo;
+
+//come potrei configurare la connessione a due database?
+export const connectMongo2 = async () => {
+  try {
+    const connection = await mongoose.createConnection(MONGODB_URI, {
+      bufferCommands: false,
+    });
+    return connection;
+  } catch (error) {
+    console.log("Error connecting to MongoDB: ", error);
+    throw error;
+  }
+};

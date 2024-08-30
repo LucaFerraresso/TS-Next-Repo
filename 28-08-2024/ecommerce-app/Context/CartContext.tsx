@@ -12,36 +12,81 @@ interface CartContextProps {
   cartItems: Item[];
   addItemToCart: (item: Item) => void;
   removeItemFromCart: (id: string) => void;
+  fetchCartItems: () => void; // Aggiungiamo una funzione per recuperare i prodotti
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<Item[]>(() => {
-    // Recupera i dati dal localStorage, se esistono
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cartItems");
-      return savedCart ? JSON.parse(savedCart) : [];
+  const [cartItems, setCartItems] = useState<Item[]>([]);
+
+  // Funzione per recuperare gli elementi del carrello dalla collezione
+  const fetchCartItems = async () => {
+    try {
+      const response = await fetch("/api/CartProducts");
+      if (!response.ok) {
+        throw new Error("Errore nel recupero dei prodotti dal carrello");
+      }
+      const data = await response.json();
+      setCartItems(data); // Imposta i prodotti nel carrello
+    } catch (error) {
+      console.error("Errore durante il fetch:", error);
     }
-    return [];
-  });
-
-  useEffect(() => {
-    // Aggiorna il localStorage quando il carrello cambia
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addItemToCart = (item: Item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
   };
 
-  const removeItemFromCart = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
+  useEffect(() => {
+    fetchCartItems(); // Recupera i prodotti all'inizializzazione
+  }, []);
+
+  const addItemToCart = async (item: Item) => {
+    console.log("Adding item to cart:", item);
+
+    try {
+      const response = await fetch("/api/CartProducts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+
+      if (!response.ok) {
+        throw new Error("Errore durante l'aggiunta al carrello");
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
+      fetchCartItems(); // Aggiorna lo stato del carrello dopo l'aggiunta
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const removeItemFromCart = async (id: string) => {
+    try {
+      const response = await fetch("/api/CartProducts", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          "Errore durante la rimozione del prodotto dal carrello"
+        );
+      }
+
+      fetchCartItems(); // Aggiorna lo stato del carrello dopo la rimozione
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addItemToCart, removeItemFromCart }}
+      value={{ cartItems, addItemToCart, removeItemFromCart, fetchCartItems }}
     >
       {children}
     </CartContext.Provider>
