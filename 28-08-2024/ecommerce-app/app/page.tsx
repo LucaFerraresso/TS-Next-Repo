@@ -11,16 +11,7 @@ export interface Item {
   description: string;
   category: string;
   images: string;
-}
-export interface ItemCart {
-  _id: string;
-  name: string;
-  price: string;
-  images: string;
-  description: string;
-  category: string;
-  quantity: number;
-  creationDate: string;
+  quantity: { type: Number; default: 1 };
 }
 
 export default function Home() {
@@ -49,32 +40,34 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-gray-100 to-gray-900 min-h-screen flex flex-col items-center">
-      <header className="w-full p-4 flex justify-end">
-        <CartIcon />
-      </header>
-      <main className="flex flex-col items-center justify-center p-6 w-full max-w-7xl">
-        <div className="bg-white shadow-xl p-10 rounded-2xl w-full">
-          <h1 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-gray-400 to-gray-700 p-4 rounded-lg shadow-lg text-transparent bg-clip-text">
-            Product List
-          </h1>
-          <button className="bg-orange-600 text-white px-4 py-2 rounded-xl shadow-md transition-transform duration-300 transform hover:scale-105">
-            <Link href="/Cart">Go to Cart</Link>
-          </button>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-            {isLoading
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="animate-pulse bg-gray-300 h-64 rounded-lg"
-                  />
-                ))
-              : items.map((item) => (
-                  <Card key={item._id} item={item} showDetailsLink={true} />
-                ))}
+    <>
+      <div className="bg-gray-900  font-press">
+        <header className="w-full p-4 flex justify-end">
+          <CartIcon />
+        </header>
+        <main className="flex flex-col items-center justify-center p-6 w-full max-w-7xl">
+          <div className="bg-gray-800 border border-gray-600 shadow-md p-8 rounded-lg w-full max-w-3xl">
+            <h1 className="text-3xl font-bold text-center mb-6 text-white">
+              Product List
+            </h1>
+            <button className="bg-orange-500 text-white px-4 py-2 rounded-md border border-gray-600 shadow-sm transition-transform duration-300 transform hover:scale-105 hover:shadow-md">
+              <Link href="/Cart">Go to Cart</Link>
+            </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              {isLoading
+                ? Array.from({ length: 6 }).map((_, index) => (
+                    <div
+                      key={index}
+                      className="animate-pulse bg-gray-700 h-64 rounded-md border border-gray-600"
+                    />
+                  ))
+                : items.map((item) => (
+                    <Card key={item._id} item={item} showDetailsLink={true} />
+                  ))}
+            </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }

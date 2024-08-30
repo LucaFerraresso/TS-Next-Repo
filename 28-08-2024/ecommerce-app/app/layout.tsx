@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 
 import "./globals.css";
 import { CartProvider } from "@/Context/CartContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +18,19 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en">
-      <CartProvider>
+    <>
+      <html lang="en">
         <body>
-          <Navbar />
-          {children}
-          <Footer />
+          <CartProvider>
+            <Navbar />
+            {children}
+            <Footer />
+
+            <ToastContainer />
+          </CartProvider>
         </body>
-      </CartProvider>
-    </html>
+      </html>
+    </>
   );
 };
 

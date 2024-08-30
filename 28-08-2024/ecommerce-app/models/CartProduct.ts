@@ -7,11 +7,11 @@ export interface CartProduct extends Document {
   description: string;
   category: string;
   images: string;
-  quantity: number;
-  createdAt: Date;
+  quantity: { type: Number; default: 1 };
 }
 
 const CartProductSchema = new mongoose.Schema({
+  _id: { type: String, required: true },
   name: {
     type: String,
     required: true,
@@ -35,11 +35,7 @@ const CartProductSchema = new mongoose.Schema({
   quantity: {
     type: Number,
     required: true,
-    default: 1, // Quantità predefinita
-  },
-  creationDate: {
-    type: Date,
-    default: Date.now, // Data di creazione predefinita all'attuale
+    default: 1,
   },
 });
 

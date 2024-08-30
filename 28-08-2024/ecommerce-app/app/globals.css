@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Press Start 2P", cursive; /* Font retro-pixel */
+  color: #f5f5f5;
+  background-color: #1a1a1a;
+}
+
+h1,
+h2 {
+  font-family: "Press Start 2P", cursive; /* Font retro-pixel */
+}
+
+button,
+a {
+  font-family: "Press Start 2P", cursive; /* Font retro-pixel */
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bg-gray-700 {
+  background-color: #2c2c2c;
+}
+
+.bg-gray-800 {
+  background-color: #1e1e1e;
+}
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
