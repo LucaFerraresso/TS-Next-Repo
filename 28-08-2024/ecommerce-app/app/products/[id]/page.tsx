@@ -56,8 +56,8 @@ const ProductPage = ({ params }: ProductProps) => {
   return (
     <>
       {" "}
-      <div className="min-h-screen bg-gray-900 p-8">
-        <div className="max-w-2xl mx-auto bg-gray-800 border border-gray-600 p-8 rounded-md shadow-md transform transition-transform hover:scale-105">
+      <div className="min-h-screen  p-8">
+        <div className="max-w-2xl mx-auto  border border-gray-600 p-8 rounded-md shadow-md transform transition-transform hover:scale-105">
           <h1 className="text-3xl font-bold mb-4 text-white">{item.name}</h1>
           <img
             src={item.images}
@@ -67,8 +67,8 @@ const ProductPage = ({ params }: ProductProps) => {
           <p className="text-xl text-gray-300 mb-4">
             Prezzo: <span className="font-bold">{item.price} €</span>
           </p>
-          <p className="text-gray-400 text-lg mb-6">{item.description}</p>
-          <p className="text-gray-400 text-lg mb-6">
+          <p className="text-gray-300 text-lg mb-6">{item.description}</p>
+          <p className="text-gray-300 text-lg mb-6">
             Categoria: {item.category}
           </p>
           <div className="text-center">

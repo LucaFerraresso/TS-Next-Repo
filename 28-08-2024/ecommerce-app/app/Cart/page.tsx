@@ -16,7 +16,7 @@ const Cart = () => {
     return (
       <>
         {" "}
-        <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-8">
+        <div className="min-h-screen flex flex-col items-center justify-center p-8">
           <h1 className="text-2xl font-bold text-white mb-4">
             Your cart is empty.
           </h1>
