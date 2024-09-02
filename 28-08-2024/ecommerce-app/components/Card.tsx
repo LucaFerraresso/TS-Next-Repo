@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import { useCart } from "@/Context/CartContext";
 import { useState } from "react";
@@ -23,36 +22,53 @@ const Card = ({ item, showDetailsLink = true }: CardProps) => {
 
   const handleAddToCart = () => {
     setIsClicked(true);
-    addItemToCart(item); // Aggiunge il prodotto al carrello tramite API
+    addItemToCart(item);
     toast.success(`${item.name} added to cart`);
-    setTimeout(() => setIsClicked(false), 300); // Resetta l'animazione dopo 300ms
+    setTimeout(() => setIsClicked(false), 300);
   };
 
   return (
-    <div
-      className="w-[300px] rounded-m p-4 flex flex-col items-center border border-black rounded-3xl
-    "
-    >
-      <h2 className="text-xl text-gray-500 mb-2">{item.name}</h2>
+    <div className="bg-gray-200 border border-gray-400 text-white px-4 py-2    hover:shadow-lg  hover:bg-gray-300 transition-colors duration-300 ">
+      <h2
+        className="text-xl text-black mb-2"
+        style={{ fontFamily: "Arial, sans-serif", textAlign: "center" }}
+      >
+        {item.name}
+      </h2>
       <img
         src={item.images}
         alt={item.name}
-        className="w-full h-48 object-cover mb-3 border border-black rounded-3xl"
+        className="w-full h-48 object-cover mb-3 cursor-pointer"
       />
-      <p className="text-lg text-gray-500 mb-3">Price: {item.price} €</p>
-      <p className="text-gray-500 mb-3">Description: {item.description}</p>
-      <p className="text-gray-500 mb-3">Category: {item.category}</p>
-      <div className="w-full flex flex-col space-y-2 border border-black rounded-3xl">
+      <p
+        className="text-lg text-black mb-3"
+        style={{ fontFamily: "Arial, sans-serif", textAlign: "center" }}
+      >
+        Price: {item.price} €
+      </p>
+      <p
+        className="text-black mb-3"
+        style={{ fontFamily: "Arial, sans-serif", textAlign: "center" }}
+      >
+        Description: {item.description}
+      </p>
+      <p
+        className="text-black mb-3"
+        style={{ fontFamily: "Arial, sans-serif", textAlign: "center" }}
+      >
+        Category: {item.category}
+      </p>
+      <div className="w-full flex flex-col space-y-2">
         <button
-          className="bg-orange-500 text-white px-4 py-2 border border-black rounded-3xl"
+          className="bg-blue-400 text-white px-4 py-2 transition-transform duration-300 transform hover:scale-105 hover:bg-blue-500 "
           onClick={handleAddToCart}
         >
           Add to Cart
         </button>
         {showDetailsLink && (
           <Link href={`/products/${item._id}`}>
-            <button className="bg-blue-500 text-white px-4 py-2 border border-black rounded-3xl ">
-              More Details
+            <button className="bg-blue-400 text-white px-4 py-2 transition-transform duration-300 transform hover:scale-105 hover:bg-blue-500">
+              <Link href={`/products/${item._id}`}>details</Link>
             </button>
           </Link>
         )}

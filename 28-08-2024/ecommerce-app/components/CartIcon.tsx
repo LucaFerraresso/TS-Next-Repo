@@ -13,7 +13,7 @@ const CartIcon = () => {
 
   return (
     <Link href="/Cart">
-      <div className="relative">
+      <div className="relative ">
         <svg
           className="w-8 h-8 text-gray-600 hover:text-gray-800 transition-colors duration-300"
           fill="none"

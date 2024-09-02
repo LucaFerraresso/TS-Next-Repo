@@ -41,32 +41,26 @@ export default function Home() {
 
   return (
     <>
-      <div className="  font-press border border-black rounded-3xl flex flex-col justify-center items-center">
-        <header className="w-full p-4 flex justify-end">
+      <div className="min-h-screen flex flex-col items-center bg-gray-100 text-black font-press p-4">
+        <div className="flex justify-center mb-6">
+          <h1 className="text-3xl font-bold text-center mb-6">Product List</h1>
+          <button className="bg-blue-400 text-white px-4 py-2 transition-transform duration-300 transform hover:scale-105 hover:shadow-lg hover:bg-blue-500 ">
+            <Link href="/Cart">Go to Cart</Link>
+          </button>
           <CartIcon />
-        </header>
-        <main className="flex flex-col items-center justify-center p-6 w-full max-w-7xl border border-black rounded-3xl">
-          <div className="  shadow-md p-8 w-full border border-black rounded-3xl">
-            <h1 className="text-3xl font-bold text-center mb-6 text-gray-500">
-              Product List
-            </h1>
-            <button className="bg-orange-500 text-white px-4 py-2   shadow-sm transition-transform duration-300 transform hover:scale-105 hover:shadow-md border border-black rounded-3xl">
-              <Link href="/Cart">Go to Cart</Link>
-            </button>
-            <div>
-              {isLoading
-                ? Array.from({ length: 6 }).map((_, index) => (
-                    <div
-                      key={index}
-                      className="animate-pulse  h-64 rounded-md border "
-                    />
-                  ))
-                : items.map((item) => (
-                    <Card key={item._id} item={item} showDetailsLink={true} />
-                  ))}
-            </div>
-          </div>
-        </main>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {isLoading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="animate-pulse bg-gray-300 h-64 border border-black"
+                />
+              ))
+            : items.map((item) => (
+                <Card key={item._id} item={item} showDetailsLink={true} />
+              ))}
+        </div>
       </div>
     </>
   );

@@ -35,57 +35,48 @@ const ProductPage = ({ params }: ProductProps) => {
 
   if (isLoading) {
     return (
-      <>
-        <div className="min-h-screen bg-gray-900 flex justify-center items-center">
-          <div className="animate-pulse bg-gray-700 h-96 w-96 rounded-md border border-gray-600" />
-        </div>
-      </>
+      <div className="min-h-screen flex justify-center items-center bg-white">
+        <div className="animate-pulse bg-gray-300 h-96 w-96 border border-black" />
+      </div>
     );
   }
 
   if (!item) {
     return (
-      <>
-        <div className="min-h-screen bg-gray-900 flex justify-center items-center">
-          <p className="text-white text-2xl">Prodotto non trovato</p>
-        </div>
-      </>
+      <div className="min-h-screen flex justify-center items-center bg-white text-black">
+        <p className="text-2xl">Prodotto non trovato</p>
+      </div>
     );
   }
 
   return (
-    <>
-      {" "}
-      <div className="min-h-screen  p-8">
-        <div className="max-w-2xl mx-auto  border border-gray-600 p-8 rounded-md shadow-md transform transition-transform hover:scale-105">
-          <h1 className="text-3xl font-bold mb-4 text-white">{item.name}</h1>
-          <img
-            src={item.images}
-            alt={item.name}
-            className="w-full h-auto mb-4 rounded-md border border-gray-600"
-          />
-          <p className="text-xl text-gray-300 mb-4">
-            Prezzo: <span className="font-bold">{item.price} €</span>
-          </p>
-          <p className="text-gray-300 text-lg mb-6">{item.description}</p>
-          <p className="text-gray-300 text-lg mb-6">
-            Categoria: {item.category}
-          </p>
-          <div className="text-center">
-            <button className="bg-orange-500 text-white px-6 py-3 rounded-md border border-gray-600 shadow-sm transition-transform duration-300 transform hover:scale-105">
-              Aggiungi al Carrello
+    <div className="min-h-screen p-8 bg-white text-black font-press">
+      <div className="max-w-2xl mx-auto border border-black p-8 shadow-md transform transition-transform hover:scale-105">
+        <h1 className="text-3xl font-bold mb-4">{item.name}</h1>
+        <img
+          src={item.images}
+          alt={item.name}
+          className="w-full h-auto mb-4 border border-black"
+        />
+        <p className="text-xl mb-4">
+          Prezzo: <span className="font-bold">{item.price} €</span>
+        </p>
+        <p className="text-lg mb-6">{item.description}</p>
+        <p className="text-lg mb-6">Categoria: {item.category}</p>
+        <div className="text-center">
+          <button className="bg-blue-400 text-white px-6 py-3 transition-transform duration-300 transform hover:scale-105 border hover:bg-blue-500">
+            Aggiungi al Carrello
+          </button>
+        </div>
+        <div className="text-center mt-4">
+          <Link href="/">
+            <button className="text-blue-400 hover:underline">
+              Torna alla Home
             </button>
-          </div>
-          <div className="text-center mt-4">
-            <Link href="/">
-              <button className="text-blue-400 hover:underline">
-                Torna alla Home
-              </button>
-            </Link>
-          </div>
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
