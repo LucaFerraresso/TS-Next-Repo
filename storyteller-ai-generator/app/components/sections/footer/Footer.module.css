@@ -1,3 +1,34 @@
 .footer {
-  background-color: orange;
+  background-color: #ff6600;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerLink {
+  margin-right: 1rem;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footerLink:hover {
+  color: #ffdd00;
+}
+
+.copyright {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .footerLink {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 }

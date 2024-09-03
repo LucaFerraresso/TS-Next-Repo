@@ -1,30 +1,34 @@
 "use client";
+import { FC, useState } from "react";
 import styles from "./page.module.css";
 import Button from "@/app/components/atoms/button/Button";
-import { useState } from "react";
-
 import Link from "next/link";
 
-export default function Home() {
+const Home: FC = () => {
   const [count, setCount] = useState(0);
 
-  const handleclick = () => {
+  const handleClick = (): void => {
     setCount(count + 1);
   };
-  const handleRedirecting = () => {
-    console.log("redirecting...");
-  };
-  return (
-    <>
-      <main className={styles.main}>
-        <Link href="/api-page">
-          <Button label="GO TO API PAGE" onClick={() => handleRedirecting()} />
-        </Link>
 
-        <h1>novels-teller AI generator app</h1>
-        <Button label="GENERA" onClick={() => handleclick()} />
-        {count}
-      </main>
-    </>
+  const handleRedirecting = (): void => {
+    console.log("Redirecting...");
+  };
+
+  return (
+    <main className={styles.main}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Novels-Teller AI Generator App</h1>
+      </div>
+      <div className={styles.buttonsContainer}>
+        <Link href="/apipage" passHref>
+          <Button label="GO TO API PAGE" onClick={handleRedirecting} />
+        </Link>
+        <Button label="GENERA" onClick={handleClick} />
+      </div>
+      <p className={styles.counter}>Generated Count: {count}</p>
+    </main>
   );
-}
+};
+
+export default Home;

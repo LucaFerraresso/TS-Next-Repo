@@ -1,10 +1,24 @@
+"use client";
+import { FC } from "react";
+import Link from "next/link";
 import styles from "./Footer.module.css";
-const Footer = () => {
+
+interface FooterProps {
+  label: string;
+  links: Array<{ name: string; href: string }>;
+}
+
+const Footer: FC<FooterProps> = ({ label, links }) => {
   return (
     <>
       <footer className={styles.footer}>
-        <div className="container mx-auto text-center">
-          <p>&copy; 2023 My Website. All rights reserved.</p>
+        <div className={styles.container}>
+          {links.map((link, index) => (
+            <Link key={index} href={link.href} className={styles.footerLink}>
+              {link.name}
+            </Link>
+          ))}
+          <p className={styles.copyright}>{label}</p>
         </div>
       </footer>
     </>

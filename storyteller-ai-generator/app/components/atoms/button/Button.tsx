@@ -1,17 +1,28 @@
-import { Interface } from "readline";
+"use client";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
   label: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset"; // Aggiunta tipizzazione per il tipo di bottone
+  ariaLabel?: string; // Aggiunta tipizzazione per aria-label per migliorare l'accessibilità
 }
 
-const Button = (props: ButtonProps) => {
-  const { label, onClick } = props;
+const Button: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  type = "button",
+  ariaLabel,
+}) => {
   return (
     <>
       <div>
-        <button onClick={onClick} className={styles.navbarButton}>
+        <button
+          type={type}
+          onClick={onClick}
+          className={styles.navbarButton}
+          aria-label={ariaLabel || label} // Uso aria-label per migliorare l'accessibilità
+        >
           {label}
         </button>
       </div>

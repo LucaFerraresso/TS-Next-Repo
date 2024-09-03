@@ -1,6 +1,19 @@
 .navbarButton {
   border: 2px solid black;
-  font-size: large;
+  font-size: 1.25rem;
   background-color: inherit;
-  text-size-adjust: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbarButton:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.navbarButton:active {
+  background-color: #dcdcdc;
+  transform: translateY(0);
 }

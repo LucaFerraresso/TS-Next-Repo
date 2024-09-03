@@ -13,18 +13,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const navbarLinks = [
+    { name: "Login", href: "/loginpage" },
+    { name: "Home", href: "/" },
+  ];
+
   return (
-    <>
-      <html lang="en">
-        <body className={inter.className}>
-          <Navbar />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </>
+    <html lang="en">
+      <body className={inter.className}>
+        <Navbar label="Story Teller" links={navbarLinks} />
+        {children}
+        <Footer
+          label="&copy; 2023 My Website. All rights reserved."
+          links={[
+            { name: "Contatti", href: "/contactpage" },
+            { name: "About Me", href: "/aboutme" },
+          ]}
+        />
+      </body>
+    </html>
   );
 }
