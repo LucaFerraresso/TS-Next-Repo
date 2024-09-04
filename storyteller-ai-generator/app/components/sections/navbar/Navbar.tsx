@@ -2,7 +2,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import HamburgerMenu from "@/app/components/menu/HamburgerMenu";
-import styles from "./Navbar.module.css";
+import styles from "./Navbar.module.scss";
 
 const menuItems = [
   { name: "Home", href: "/" },

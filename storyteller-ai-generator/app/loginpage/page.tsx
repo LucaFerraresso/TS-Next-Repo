@@ -2,7 +2,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import Button from "../components/atoms/button/Button";
-import styles from "./loginpage.module.css";
+import styles from "./loginpage.module.scss";
 
 const LoginPage: FC = () => {
   const handleClick = (): void => {

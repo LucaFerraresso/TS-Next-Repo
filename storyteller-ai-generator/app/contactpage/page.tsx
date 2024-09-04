@@ -1,6 +1,6 @@
 "use client";
 import { FC } from "react";
-import styles from "./contactpage.module.css";
+import styles from "./contactpage.module.scss";
 
 const ContactPage: FC = () => {
   return (

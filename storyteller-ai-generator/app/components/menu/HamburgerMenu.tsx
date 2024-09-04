@@ -1,6 +1,6 @@
 "use client";
 import { FC, useState } from "react";
-import styles from "./HamburgerMenu.module.css";
+import styles from "./HamburgerMenu.module.scss";
 
 interface MenuItem {
   name: string;

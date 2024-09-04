@@ -1,7 +1,7 @@
 "use client";
 import { FC } from "react";
 import Link from "next/link";
-import styles from "./Footer.module.css";
+import styles from "./Footer.module.scss";
 
 interface FooterProps {
   label: string;
