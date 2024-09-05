@@ -16,14 +16,17 @@ const InputField = ({
   type = "text",
 }: InputFieldProps) => {
   return (
-    <input
-      name={name}
-      value={value}
-      placeholder={placeholder}
-      onChange={onChange}
-      type={type}
-      className={styles.inputField}
-    />
+    <>
+      <label>{name}</label>
+      <input
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        type={type}
+        className={styles.inputField}
+      />
+    </>
   );
 };
 

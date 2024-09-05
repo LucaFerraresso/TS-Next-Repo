@@ -18,13 +18,11 @@ export default async function handler(
 
     // Verifica che tutti i parametri siano presenti
     if (!protagonista || !antagonista || !tipoStoria || !genere) {
-      return res
-        .status(400)
-        .json({
-          ok: false,
-          message:
-            "Parametri mancanti. Assicurati che protagonista, antagonista, tipoStoria e genere siano forniti.",
-        });
+      return res.status(400).json({
+        ok: false,
+        message:
+          "Parametri mancanti. Assicurati che protagonista, antagonista, tipoStoria e genere siano forniti.",
+      });
     }
 
     // Crea il prompt per l'AI

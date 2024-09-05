@@ -17,6 +17,8 @@ export default function RootLayout({
   const navbarLinks = [
     { name: "Login", href: "/loginpage" },
     { name: "Home", href: "/" },
+    { name: "About", href: "/aboutme" },
+    { name: "Story Teller", href: "/" },
   ];
 
   return (
