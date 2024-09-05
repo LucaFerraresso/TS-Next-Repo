@@ -57,7 +57,7 @@ const MenuSelection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const apikey = process.env.GEMINI_USER_KEY;
+    const apikey = process.env.NEXT_PUBLIC_GEMINI_USER_KEY;
     console.log(apikey);
 
     // Costruisci i dati da inviare alla API
@@ -67,9 +67,10 @@ const MenuSelection = () => {
       tipoStoria: formValues.tipoStoria,
       genere: formValues.genere,
     };
+    console.log(data);
 
     // Esegui la richiesta POST alla tua API
-    const response = await fetch("api/api/getsinglestory", {
+    const response = await fetch("app/api/getsinglestory", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
