@@ -70,7 +70,7 @@ const MenuSelection = () => {
     console.log(data);
 
     // Esegui la richiesta POST alla tua API
-    const response = await fetch("app/api/getsinglestory", {
+    const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GenerateContentCandidate } from "@google/generative-ai";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export async function POST(request: Request) {
   const { protagonista, antagonista, tipoStoria, genere } =
