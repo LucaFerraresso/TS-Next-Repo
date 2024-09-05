@@ -47,3 +47,13 @@
     font-size: 1rem;
   }
 }
+
+@media (max-width: 1024px) {
+  .main {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}

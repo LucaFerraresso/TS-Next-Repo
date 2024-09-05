@@ -7,7 +7,7 @@ import styles from "./MenuSelection.module.scss";
 interface FormValues {
   protagonista: string;
   antagonista: string;
-  tipoStoria: "bambini" | "adulti";
+  tipoStoria: string | boolean;
   genere: string;
 }
 
@@ -15,11 +15,12 @@ const MenuSelection = () => {
   const [formValues, setFormValues] = useState<FormValues>({
     protagonista: "",
     antagonista: "",
-    tipoStoria: "bambini",
-    genere: "horror", // Default genre option
+    tipoStoria: "",
+    genere: "",
   });
   const [response, setResponse] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,38 +52,45 @@ const MenuSelection = () => {
   };
 
   const validateForm = (values: FormValues) => {
-    const isValid = Object.values(values).every((value) => value.trim() !== "");
+    const isValid = Object.values(values).every(
+      (value) => value.trim() !== "" && value !== undefined && value !== null
+    );
     setIsFormValid(isValid);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const apikey = process.env.NEXT_PUBLIC_GEMINI_USER_KEY;
-    console.log(apikey);
+    setLoading(true);
+    setResponse("");
 
-    // Costruisci i dati da inviare alla API
-    const data = {
-      protagonista: formValues.protagonista,
-      antagonista: formValues.antagonista,
-      tipoStoria: formValues.tipoStoria,
-      genere: formValues.genere,
-    };
-    console.log(data);
+    const { protagonista, antagonista, tipoStoria, genere } = formValues;
 
-    // Esegui la richiesta POST alla tua API
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch("/api/getstory", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          protagonista,
+          antagonista,
+          tipoStoria,
+          genere,
+        }),
+      });
 
-    if (response.ok) {
+      if (!response.ok) {
+        throw new Error("Errore nel recupero della storia");
+      }
+
       const result = await response.json();
       setResponse(result.story);
-    } else {
-      console.error("Error fetching story from API");
+      console.log("Storia generata:", result.story);
+    } catch (error) {
+      console.error("Errore nella richiesta:", error);
+      setResponse("Errore durante la generazione della storia.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -127,10 +135,10 @@ const MenuSelection = () => {
         </div>
         <button
           type="submit"
-          disabled={!isFormValid}
-          className={!isFormValid ? styles.disabledButton : ""}
+          disabled={!isFormValid || loading}
+          className={!isFormValid || loading ? styles.disabledButton : ""}
         >
-          Submit
+          {loading ? "Generando..." : "Submit"}
         </button>
       </form>
       {response && (

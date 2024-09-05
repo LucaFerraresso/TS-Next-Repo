@@ -62,3 +62,14 @@
     color: #333;
   }
 }
+.menuSelection {
+  max-width: 100%;
+  padding: 20px;
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 10px;
+  }
+}
