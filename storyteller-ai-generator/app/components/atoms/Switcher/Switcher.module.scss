@@ -1,22 +1,32 @@
 .switch {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-md); /* Spazio uniforme tra gli elementi */
+  font-size: var(--font-size-base); /* Dimensione font di base */
 
+  /* Nascondi l'input di checkbox */
   input[type="checkbox"] {
     display: none;
   }
 
+  /* Stile del toggle */
   .slider {
     width: 40px;
     height: 20px;
-    background-color: #ccc;
+    background-color: var(--color-secondary);
     border-radius: 20px;
     position: relative;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-duration),
+      box-shadow var(--transition-duration);
     cursor: pointer;
+
+    /* Effetto di hover */
+    &:hover {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
   }
 
+  /* Stile del pallino all'interno del toggle */
   .slider::before {
     content: "";
     position: absolute;
@@ -24,25 +34,30 @@
     left: 2px;
     width: 16px;
     height: 16px;
-    background-color: white;
+    background-color: var(--color-bg-light);
     border-radius: 50%;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-duration);
   }
 
+  /* Cambia lo stile quando il checkbox è selezionato */
   input:checked + .slider {
-    background-color: #0070f3;
+    background-color: var(--color-primary);
   }
 
   input:checked + .slider::before {
     transform: translateX(20px);
   }
 
+  /* Etichetta */
   .label {
-    margin-left: 10px;
-    font-size: 16px;
+    margin-left: var(--space-sm); /* Spazio tra il toggle e l'etichetta */
+    font-size: var(--font-size-base); /* Dimensione font di base */
+    color: var(--color-text-dark);
 
     @media (max-width: 600px) {
-      font-size: 14px;
+      font-size: var(
+        --font-size-sm
+      ); /* Riduci dimensione font sui piccoli schermi */
     }
   }
 }

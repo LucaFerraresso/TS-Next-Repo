@@ -1,31 +1,50 @@
 .navbar {
-  padding: 1rem 2rem;
-  background-color: var(--navbar-bg-color, #34495e);
+  background-color: var(
+    --color-retro-dark
+  ); /* Colore di sfondo scuro per contrasto */
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+  padding: var(--space-sm) var(--space-lg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombra per separare la navbar dal resto della pagina */
 
-.title {
-  font-size: 1.5rem;
-  color: var(--navbar-text-color, #ecf0f1);
-}
+  .title {
+    font-size: var(--font-size-lg);
+    color: var(
+      --color-text-light
+    ); /* Titolo chiaro per contrastare con lo sfondo scuro */
+  }
 
-.links {
-  display: flex;
-  align-items: center;
-}
+  .links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
 
-.navLink {
-  margin-left: 1.5rem;
-  font-size: 1rem;
-  color: var(--navbar-link-color, #ecf0f1);
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+    .navLink {
+      margin-left: var(--space-md);
+      color: var(--color-text-light); /* Link chiari per contrasto */
+      text-decoration: none;
+      transition: color var(--transition-duration) var(--transition-ease);
 
-.navLink:hover {
-  color: var(--navbar-link-hover-color, #f39c12);
+      &:hover {
+        color: var(--color-retro-accent); /* Hover con accento retro */
+      }
+    }
+  }
+
+  /* Mobile Hamburger Menu */
+  .hamburger {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .links {
+      display: none; /* Nascondi i link nel menu su mobile */
+    }
+
+    .hamburger {
+      display: block; /* Mostra il menu hamburger su mobile */
+    }
+  }
 }

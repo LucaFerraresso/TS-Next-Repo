@@ -1,34 +1,63 @@
 .footer {
-  background-color: #ff6600;
-  padding: 1rem 2rem;
+  background-color: var(--color-bg-dark);
+  padding: var(--space-lg) var(--space-md);
   text-align: center;
-  color: white;
-}
+  color: var(--color-text-light);
+  transition: background-color var(--transition-duration) var(--transition-ease);
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footerLink {
-  margin-right: 1rem;
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-.footerLink:hover {
-  color: #ffdd00;
-}
-
-.copyright {
-  margin-top: 1rem;
-  font-size: 0.875rem;
-}
-
-@media (max-width: 768px) {
   .footerLink {
-    display: block;
-    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+    margin: 0 var(--space-md);
+    text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-ease);
+
+    &:hover {
+      color: var(--color-secondary);
+    }
+  }
+
+  .copyright {
+    font-size: var(--font-size-base);
+    color: var(--color-text-light);
+  }
+}
+
+.footer {
+  background-color: var(
+    --color-retro-dark
+  ); /* Colore di sfondo scuro per contrasto */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombra per separare la navbar dal resto della pagina */
+
+  .title {
+    font-size: var(--font-size-lg);
+    color: var(
+      --color-text-light
+    ); /* Titolo chiaro per contrastare con lo sfondo scuro */
+  }
+
+  .links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+
+    .footerLink {
+      margin-left: var(--space-md);
+      color: var(--color-text-light); /* Link chiari per contrasto */
+      text-decoration: none;
+      transition: color var(--transition-duration) var(--transition-ease);
+
+      &:hover {
+        color: var(--color-retro-accent); /* Hover con accento retro */
+      }
+    }
+    .copyright {
+      font-size: var(--font-size-base);
+      color: var(--color-text-light);
+    }
   }
 }

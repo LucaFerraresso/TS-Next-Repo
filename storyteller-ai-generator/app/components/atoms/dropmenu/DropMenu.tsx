@@ -10,11 +10,16 @@ interface DropMenuProps {
 const DropMenu = ({ name, value, options, onChange }: DropMenuProps) => {
   return (
     <div className={styles.dropdownContainer}>
+      <label htmlFor={name} className={styles.dropdownLabel}>
+        {name}
+      </label>
       <select
+        id={name}
         name={name}
         value={value}
         onChange={onChange}
         className={styles.dropdown}
+        aria-label={name} // Aggiunge un attributo aria per l'accessibilità
       >
         {options.map((option, index) => (
           <option key={index} value={option}>

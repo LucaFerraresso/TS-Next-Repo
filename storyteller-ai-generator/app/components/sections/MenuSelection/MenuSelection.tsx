@@ -27,7 +27,6 @@ const MenuSelection = () => {
     setFormValues((prevValues) => {
       const updatedValues = { ...prevValues, [name]: value };
       validateForm(updatedValues);
-      console.log("input", updatedValues);
       return updatedValues;
     });
   };
@@ -39,7 +38,6 @@ const MenuSelection = () => {
         tipoStoria: checked ? "adulti" : "bambini",
       };
       validateForm(updatedValues);
-      console.log("switcher", updatedValues);
       return updatedValues;
     });
   };
@@ -49,7 +47,6 @@ const MenuSelection = () => {
     setFormValues((prevValues) => {
       const updatedValues = { ...prevValues, [name]: value };
       validateForm(updatedValues);
-      console.log("dropdown", updatedValues);
       return updatedValues;
     });
   };
@@ -59,8 +56,8 @@ const MenuSelection = () => {
       (value) => value.trim() !== "" && value !== undefined && value !== null
     );
     setIsFormValid(isValid);
-    console.log("Form valido:", isValid);
   };
+
   const handlereset = () => {
     setFormValues({
       protagonista: "",
@@ -78,13 +75,6 @@ const MenuSelection = () => {
     setResponse("");
 
     const { protagonista, antagonista, tipoStoria, genere } = formValues;
-    console.log(
-      "Storia richiesta:",
-      protagonista,
-      antagonista,
-      tipoStoria,
-      genere
-    );
 
     try {
       const response = await fetch("/api/getstory", {
@@ -103,14 +93,10 @@ const MenuSelection = () => {
       if (!response.ok) {
         throw new Error("Errore nel recupero della storia");
       }
-      console.log("Storia generata con successo");
 
       const result = await response.json();
-      console.log("Risposta API:", result);
       setResponse(result.story);
-      console.log("Storia generata:", result.story);
     } catch (error) {
-      console.error("Errore nella richiesta:", error);
       setResponse("Errore durante la generazione della storia.");
     } finally {
       setLoading(false);
@@ -121,37 +107,35 @@ const MenuSelection = () => {
   return (
     <>
       <form className={styles.menuSelection} onSubmit={handleSubmit}>
-        <h1>Menu Selection</h1>
-        <div>
-          <p>Choose your avatar names</p>
+        <h1>Genera una storia con l'api di GEMINI</h1>
+        <p>scegli le opzioni:</p>
+        <div className={styles.inputContainer}>
           <InputField
             name="protagonista"
-            placeholder="Inserisci nome protagonista:"
+            placeholder="Nome protagonista"
             value={formValues.protagonista}
             onChange={handleInputChange}
           />
           <InputField
             name="antagonista"
-            placeholder="Inserisci nome antagonista:"
+            placeholder="Nome antagonista"
             value={formValues.antagonista}
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className={styles.menuContainer}>
           <DropMenu
             name="genere"
             value={formValues.genere}
             options={[
-              "horror",
-              "avventura",
-              "commedia",
-              "comico",
-              "fantascienza",
+              "Horror",
+              "Avventura",
+              "Commedia",
+              "Comico",
+              "Fantascienza",
             ]}
             onChange={handleDropdownChange}
           />
-        </div>
-        <div>
           <Switcher
             checked={formValues.tipoStoria === "adulti"}
             onChange={handleSwitchChange}
@@ -160,20 +144,25 @@ const MenuSelection = () => {
         <button
           type="submit"
           disabled={!isFormValid || loading}
-          className={`${loading ? "loading" : ""} ${
-            !isFormValid || loading
-              ? styles.disabledButton
-              : styles.activeButton
+          className={`${styles.button} ${
+            loading
+              ? styles.loadingButton
+              : isFormValid
+              ? styles.activeButton
+              : styles.disabledButton
           }`}
         >
-          {loading ? "Generando..." : "Submit"}
+          {loading ? "Generando..." : "Genera Storia"}
         </button>
       </form>
-      {loading ? <div className="skeleton"></div> : <p>{response}</p>}
-      {response && (
-        <div className={styles.responseContainer}>
-          <p>{response}</p>
-        </div>
+      {loading ? (
+        <div className={styles.skeleton}></div>
+      ) : (
+        response && (
+          <div className={styles.responseContainer}>
+            <p>{response}</p>
+          </div>
+        )
       )}
     </>
   );

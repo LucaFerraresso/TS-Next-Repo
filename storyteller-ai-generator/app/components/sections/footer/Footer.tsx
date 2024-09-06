@@ -12,13 +12,13 @@ const Footer: FC<FooterProps> = ({ label, links }) => {
   return (
     <>
       <footer className={styles.footer}>
-        <div className={styles.container}>
+        <h1 className={styles.copyright}>{label}</h1>
+        <div className={styles.links}>
           {links.map((link, index) => (
             <Link key={index} href={link.href} className={styles.footerLink}>
               {link.name}
             </Link>
           ))}
-          <p className={styles.copyright}>{label}</p>
         </div>
       </footer>
     </>

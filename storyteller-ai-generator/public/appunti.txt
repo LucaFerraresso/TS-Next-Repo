@@ -180,3 +180,233 @@ const MenuSelection = () => {
 };
 
 export default MenuSelection;
+
+/////////////////////////////////////////////////////
+navbar 
+
+"use client";
+import { FC } from "react";
+import Link from "next/link";
+import HamburgerMenu from "@/app/components/menu/HamburgerMenu";
+import styles from "./Navbar.module.scss";
+
+const menuItems = [
+  { name: "Home", href: "/" },
+  { name: "API", href: "/apipage" },
+  { name: "About", href: "/aboutme" },
+  { name: "Contact", href: "/contactpage" },
+  { name: "Login", href: "/loginpage" },
+];
+
+interface NavbarProps {
+  label: string;
+  links: Array<{ name: string; href: string }>;
+}
+
+const Navbar: FC<NavbarProps> = ({ label, links }) => {
+  return (
+    <nav className={`${styles.navbar} container mx-auto`}>
+      <h1 className={styles.title}>{label}</h1>
+      <div className={`${styles.links} hidden md:flex`}>
+        {links.map((link, index) => (
+          <Link key={index} href={link.href} className={styles.navLink}>
+            {link.name}
+          </Link>
+        ))}
+      </div>
+      {/* Il menu hamburger è visibile solo su schermi piccoli */}
+      <div className="md:hidden">
+        <HamburgerMenu items={menuItems} />
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+
+/////////////////////////////////////////////////////////////
+
+menuSelection
+
+import { useState } from "react";
+import InputField from "../../atoms/Input/InputField";
+import Switcher from "../../atoms/Switcher/Switcher";
+import DropMenu from "../../atoms/dropmenu/DropMenu";
+import styles from "./MenuSelection.module.scss";
+
+interface FormValues {
+  protagonista: string;
+  antagonista: string;
+  tipoStoria: string | boolean;
+  genere: string;
+}
+
+const MenuSelection = () => {
+  const [formValues, setFormValues] = useState<FormValues>({
+    protagonista: "",
+    antagonista: "",
+    tipoStoria: "",
+    genere: "",
+  });
+  const [response, setResponse] = useState<string>("");
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => {
+      const updatedValues = { ...prevValues, [name]: value };
+      validateForm(updatedValues);
+      console.log("input", updatedValues);
+      return updatedValues;
+    });
+  };
+
+  const handleSwitchChange = (checked: boolean) => {
+    setFormValues((prevValues) => {
+      const updatedValues = {
+        ...prevValues,
+        tipoStoria: checked ? "adulti" : "bambini",
+      };
+      validateForm(updatedValues);
+      console.log("switcher", updatedValues);
+      return updatedValues;
+    });
+  };
+
+  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => {
+      const updatedValues = { ...prevValues, [name]: value };
+      validateForm(updatedValues);
+      console.log("dropdown", updatedValues);
+      return updatedValues;
+    });
+  };
+
+  const validateForm = (values: FormValues) => {
+    const isValid = Object.values(values).every(
+      (value) => value.trim() !== "" && value !== undefined && value !== null
+    );
+    setIsFormValid(isValid);
+    console.log("Form valido:", isValid);
+  };
+  const handlereset = () => {
+    setFormValues({
+      protagonista: "",
+      antagonista: "",
+      tipoStoria: "",
+      genere: "",
+    });
+    setIsFormValid(false);
+    setLoading(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setResponse("");
+
+    const { protagonista, antagonista, tipoStoria, genere } = formValues;
+    console.log(
+      "Storia richiesta:",
+      protagonista,
+      antagonista,
+      tipoStoria,
+      genere
+    );
+
+    try {
+      const response = await fetch("/api/getstory", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          protagonista,
+          antagonista,
+          tipoStoria,
+          genere,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Errore nel recupero della storia");
+      }
+      console.log("Storia generata con successo");
+
+      const result = await response.json();
+      console.log("Risposta API:", result);
+      setResponse(result.story);
+      console.log("Storia generata:", result.story);
+    } catch (error) {
+      console.error("Errore nella richiesta:", error);
+      setResponse("Errore durante la generazione della storia.");
+    } finally {
+      setLoading(false);
+    }
+    handlereset();
+  };
+
+  return (
+    <>
+      <form className={styles.menuSelection} onSubmit={handleSubmit}>
+        <h1>Menu Selection</h1>
+        <div>
+          <p>Choose your avatar names</p>
+          <InputField
+            name="protagonista"
+            placeholder="Inserisci nome protagonista:"
+            value={formValues.protagonista}
+            onChange={handleInputChange}
+          />
+          <InputField
+            name="antagonista"
+            placeholder="Inserisci nome antagonista:"
+            value={formValues.antagonista}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <DropMenu
+            name="genere"
+            value={formValues.genere}
+            options={[
+              "horror",
+              "avventura",
+              "commedia",
+              "comico",
+              "fantascienza",
+            ]}
+            onChange={handleDropdownChange}
+          />
+        </div>
+        <div>
+          <Switcher
+            checked={formValues.tipoStoria === "adulti"}
+            onChange={handleSwitchChange}
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={!isFormValid || loading}
+          className={`${loading ? "loading" : ""} ${
+            !isFormValid || loading
+              ? styles.disabledButton
+              : styles.activeButton
+          }`}
+        >
+          {loading ? "Generando..." : "Submit"}
+        </button>
+      </form>
+      {loading ? <div className="skeleton"></div> : <p>{response}</p>}
+      {response && (
+        <div className={styles.responseContainer}>
+          <p>{response}</p>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default MenuSelection;

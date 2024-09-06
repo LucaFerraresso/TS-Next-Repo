@@ -1,79 +1,86 @@
 :root {
-  --navbar-bg-color: #34495e;
-  --navbar-text-color: #ecf0f1;
-  --navbar-link-color: #ecf0f1;
-  --navbar-link-hover-color: #f39c12;
-  --hamburger-icon-color: #ecf0f1;
-  --menu-bg-color: #fff;
-  --menu-item-color: #333;
-  --menu-item-hover-bg-color: #f0f0f0;
+  /* Color Palette */
+  --color-primary: #27ae60; /* Soft green */
+  --color-primary-dark: #1e8449;
+  --color-secondary: #f39c12; /* Bright orange */
+  --color-secondary-dark: #e67e22;
+  --color-accent: #3498db; /* Light blue accent */
+  --color-bg-light: #f5f7fa;
+  --color-bg-dark: #2c3e50;
+  --color-text-dark: #2c3e50;
+  --color-text-light: #ecf0f1;
+
+  /* New Colors for Retro-Minimal Style */
+  --color-retro-bg: #eae4d3; /* Light retro beige */
+  --color-retro-dark: #3b3b3b; /* Dark retro gray */
+  --color-retro-accent: #ff6347; /* Retro coral accent */
+
+  /* Navbar */
+  --navbar-bg-color: var(--color-retro-dark);
+  --navbar-text-color: var(--color-retro-bg);
+  --navbar-link-color: var(--color-text-light);
+  --navbar-link-hover-color: var(--color-retro-accent);
+  --hamburger-icon-color: var(--color-text-light);
+
+  /* Button Colors */
+  --button-bg-color: var(--color-primary);
+  --button-hover-bg-color: var(--color-primary-dark);
+  --button-text-color: var(--color-text-light);
+
+  /* Gradients */
+  --gradient-background: linear-gradient(135deg, #f5f7fa, #dfe6e9);
+  --gradient-navbar: linear-gradient(45deg, #3b3b3b, #1e8449);
+  --gradient-footer: linear-gradient(
+    45deg,
+    #1e8449,
+    #27ae60
+  ); /* Modificato per migliorare il contrasto */
+
+  /* Typography */
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Roboto Mono", monospace;
+  --font-size-base: 16px;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2rem;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+
+  /* Transitions and Animations */
   --transition-duration: 0.3s;
-  --transition-ease: ease;
+  --transition-ease: ease-in-out;
+  --fade-in-duration: 0.5s;
+  --scale-duration: 0.3s;
 }
-#root {
-  padding: 0;
-  margin: 0 auto;
-  box-sizing: border-box;
+
+/* Footer */
+.footer {
+  background: var(--gradient-footer);
+  color: var(--color-text-light);
+  padding: var(--space-lg) var(--space-md); /* Aumentato il padding per migliorare la struttura */
+  text-align: center;
+  transition: background-color var(--transition-duration) var(--transition-ease);
 }
-/*
-  1. Use a more-intuitive box-sizing model.
-*/
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+
+.footerLink {
+  color: var(--color-text-light);
+  margin: 0 var(--space-md); /* Spaziatura orizzontale per disporre i link in modo uniforme */
+  text-decoration: none;
+  transition: color var(--transition-duration) var(--transition-ease);
+
+  &:hover {
+    color: var(--color-secondary-dark);
+  }
 }
-/*
-  2. Remove default margin
-*/
-* {
-  margin: 0;
-}
-/*
-  Typographic tweaks!
-  3. Add accessible line-height
-  4. Improve text rendering
-*/
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-/*
-  5. Improve media defaults
-*/
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-/*
-  6. Remove built-in form typography styles
-*/
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-/*
-  7. Avoid text overflows
-*/
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-/*
-  8. Create a root stacking context
-*/
-#root,
-#__next {
-  isolation: isolate;
+
+.footer .container {
+  display: flex;
+  justify-content: center; /* I link vengono centrati */
+  align-items: center;
+  flex-wrap: wrap; /* Per una buona disposizione su schermi piccoli */
+  gap: var(--space-md); /* Aggiungiamo un gap per separare i link */
 }

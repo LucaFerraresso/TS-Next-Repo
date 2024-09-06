@@ -16,9 +16,12 @@ const InputField = ({
   type = "text",
 }: InputFieldProps) => {
   return (
-    <>
-      <label>{name}</label>
+    <div className={styles.inputWrapper}>
+      <label htmlFor={name} className={styles.inputLabel}>
+        {name}
+      </label>
       <input
+        id={name}
         name={name}
         value={value}
         placeholder={placeholder}
@@ -26,7 +29,7 @@ const InputField = ({
         type={type}
         className={styles.inputField}
       />
-    </>
+    </div>
   );
 };
 

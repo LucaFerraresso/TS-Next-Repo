@@ -12,8 +12,16 @@ const Switcher = ({ checked, onChange }: SwitcherProps) => {
   };
 
   return (
-    <label className={styles.switch}>
-      <input type="checkbox" checked={checked} onChange={handleSwitch} />
+    <label
+      className={styles.switch}
+      aria-label={`Switcher for ${checked ? "adults" : "children"}`}
+    >
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={handleSwitch}
+        aria-checked={checked} // Migliora l'accessibilità
+      />
       <span className={styles.slider}></span>
       <span className={styles.label}>{checked ? "Adulti" : "Bambini"}</span>
     </label>
